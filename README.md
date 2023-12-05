@@ -56,7 +56,7 @@ EnCom : 企业通信协议软件，它可以实现不同平台和设备之间的
 * 到期或库存紧张的提醒
 ```
 ### 数据处理和报告生成
-##### 设备接入数据 
+##### 设备接入数据
 ```
 普遍需求:
 • 读取、管理来自测试设备的数据，无需二次输入
@@ -282,84 +282,84 @@ ${HEADLESS}    false
 // 首先构造关键字
 *** Test Cases ***
 Create Quote for Car
-    Open Insurance Application
-    Enter Vehicle Data for Automobile
-    Enter Insurant Data
-    Enter Product Data
-    Select Price Option
-    BuiltIn.Sleep  3
-    Send Quote
-    End Test
+Open Insurance Application
+Enter Vehicle Data for Automobile
+Enter Insurant Data
+Enter Product Data
+Select Price Option
+BuiltIn.Sleep  3
+Send Quote
+End Test
 
 *** Keywords ***
 Open Insurance Application
-    New Browser    browser=${BROWSER}    headless=${HEADLESS}
-    New Context    locale=en-GB
-    New Page    http://sampleapp.tricentis.com/
+New Browser    browser=${BROWSER}    headless=${HEADLESS}
+New Context    locale=en-GB
+New Page    http://sampleapp.tricentis.com/
 
 Enter Vehicle Data for Automobile
-    Click    div.main-navigation >> "Automobile"
-    # 刷新页面
-    Browser.Reload
-    # 继续执行其他操作
-    Select Options By    id=make    text    Audi
-    Fill Text    id=engineperformance    110
-    Fill Text    id=dateofmanufacture    06/12/1980
-    Select Options By    id=numberofseats    text    5
-    Select Options By    id=fuel    text    Petrol    
-    Fill Text    id=listprice    30000
-    Fill Text    id=licenseplatenumber    DMK1234
-    Fill Text    id=annualmileage   10000 
-    Click    section[style="display: block;"] >> text=Next »
+Click    div.main-navigation >> "Automobile"
+# 刷新页面
+Browser.Reload
+# 继续执行其他操作
+Select Options By    id=make    text    Audi
+Fill Text    id=engineperformance    110
+Fill Text    id=dateofmanufacture    06/12/1980
+Select Options By    id=numberofseats    text    5
+Select Options By    id=fuel    text    Petrol
+Fill Text    id=listprice    30000
+Fill Text    id=licenseplatenumber    DMK1234
+Fill Text    id=annualmileage   10000
+Click    section[style="display: block;"] >> text=Next »
 
 Enter Insurant Data
-    [Arguments]    ${firstname}=Max    ${lastname}=Mustermann
-    Fill Text    id=firstname    Max
-    Fill Text    id=lastname    Mustermann
-    Fill Text    id=birthdate    01/31/1980
-    Check Checkbox    *css=label >> id=gendermale
-    Fill Text    id=streetaddress    Test Street
-    Select Options By    id=country    text    Germany
-    Fill Text    id=zipcode    40123
-    Fill Text    id=city    Essen
-    Select Options By    id=occupation    text    Employee
-    Click    text=Cliff Diving
-    Click    section[style="display: block;"] >> text=Next »
+[Arguments]    ${firstname}=Max    ${lastname}=Mustermann
+Fill Text    id=firstname    Max
+Fill Text    id=lastname    Mustermann
+Fill Text    id=birthdate    01/31/1980
+Check Checkbox    *css=label >> id=gendermale
+Fill Text    id=streetaddress    Test Street
+Select Options By    id=country    text    Germany
+Fill Text    id=zipcode    40123
+Fill Text    id=city    Essen
+Select Options By    id=occupation    text    Employee
+Click    text=Cliff Diving
+Click    section[style="display: block;"] >> text=Next »
 
 Enter Product Data
-    Fill Text    id=startdate    12/16/2023
-    Select Options By    id=insurancesum    text    7.000.000,00
-    Select Options By    id=meritrating    text    Bonus 1
-    Select Options By    id=damageinsurance    text    No Coverage
-    Check Checkbox    *css=label >> id=EuroProtection
-    Select Options By    id=courtesycar    text    Yes
-    Click    section[style="display: block;"] >> text=Next »
+Fill Text    id=startdate    12/16/2023
+Select Options By    id=insurancesum    text    7.000.000,00
+Select Options By    id=meritrating    text    Bonus 1
+Select Options By    id=damageinsurance    text    No Coverage
+Check Checkbox    *css=label >> id=EuroProtection
+Select Options By    id=courtesycar    text    Yes
+Click    section[style="display: block;"] >> text=Next »
 
 Select Price Option
-    [Arguments]    ${price_option}=Silver
-    Click    *css=label >> css=[value=${price_option}]
-    Click    section[style="display: block;"] >> text=Next »
+[Arguments]    ${price_option}=Silver
+Click    *css=label >> css=[value=${price_option}]
+Click    section[style="display: block;"] >> text=Next »
 
 Send Quote
-    # 休息30秒才重新进入网页，因为网页有些更改
-    #BuiltIn.Sleep 30
-    Fill Text    "E-Mail" >> .. >> input    dogechat@163.com
-    Fill Text    "Phone" >> .. >> input    0049201123456
-    Fill Text    "Username" >> .. >> input    max.mustermann
-    Fill Text    "Password" >> .. >> input    SecretPassword123!
-    Fill Text    "Confirm Password" >> .. >> input    SecretPassword123!
-    Fill Text    "Comments" >> .. >> textarea    Some comments
-    ${promise}=     Promise To    Wait For Response     matcher=https://sampleapp.tricentis.com/101/tcpdf/pdfs/quote.php    timeout=20
-    Click    "« Send »"
-    ${body}=    Wait For    ${promise}
-    Log    ${body}[status]
-    Log    ${body}[body]
-    Wait For Elements State    "Sending e-mail success!"
-    Click    "OK"
+# 休息30秒才重新进入网页，因为网页有些更改
+#BuiltIn.Sleep 30
+Fill Text    "E-Mail" >> .. >> input    dogechat@163.com
+Fill Text    "Phone" >> .. >> input    0049201123456
+Fill Text    "Username" >> .. >> input    max.mustermann
+Fill Text    "Password" >> .. >> input    SecretPassword123!
+Fill Text    "Confirm Password" >> .. >> input    SecretPassword123!
+Fill Text    "Comments" >> .. >> textarea    Some comments
+${promise}=     Promise To    Wait For Response     matcher=https://sampleapp.tricentis.com/101/tcpdf/pdfs/quote.php    timeout=20
+Click    "« Send »"
+${body}=    Wait For    ${promise}
+Log    ${body}[status]
+Log    ${body}[body]
+Wait For Elements State    "Sending e-mail success!"
+Click    "OK"
 
 End Test
-    Close Context
-    Close Browser
+Close Context
+Close Browser
 
 ### 关于Kubernetes
 
@@ -381,12 +381,12 @@ kubernetes和springcloud有本质区别
 ```
 #### Node组件
 ```
-kubelet 
+kubelet
 1 每一个节点都运行一个代理(Agent)，保证每个容器container都运行在kubelet抽取的pod中（听音乐买的肯定是ipod而不是直接买音乐），pod里面可以有多个容器。
     1.1 kuberletes使用pod来组织一组容器，一个kubelet可以控制多个pod
     1.2 一个pod中的所有容器共享同一网络
     1.3 container不是kuberletes的最小单元，而是pod
-    1.4 container可以理解成一个docker 
+    1.4 container可以理解成一个docker
 2 负责每一个容器的生命周期，同时也负责容器挂载目录CSI的管理和网络CNI管理（（Container Network Interface）和 CSI（Container Storage Interface））
     2.1 通过kube-proxy管理CNI和负载均衡
 
@@ -469,7 +469,7 @@ lvm2
 
 安装docker前还需要更新docker的拉取仓库目录：
 yum-config-manager \
- --add-repo \
+--add-repo \
 https://download.docker.com/linux/centos/docker-ce.repo  自己找
 
 安装docker和docker-cli:
@@ -509,17 +509,17 @@ systemctl start kubelet
 
 首先下载好镜像：为k8s文件夹下的master_images.sh设置rwx权限：chmod 700 master_images.sh
 然后运行sh
- 如果出现错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running
- 就是docker未启动：systemctl status docker => dead
- 需要启动并设置自动启动
+如果出现错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running
+就是docker未启动：systemctl status docker => dead
+需要启动并设置自动启动
 
 
 master 节点初始化（也需要拉取很多镜像，从k8s.gcr.io网站，国内无法访问，因此需要修改镜像拉取仓库地址）：
 kubeadm init \
---apiserver-advertise-address=10.0.2.15 \ 
---image-repository registry.cn-hangzhou.aliyuncs.com/google_containers \ 
---kubernetes-version v1.17.3 \ 
---service-cidr=10.96.0.0/16 \ 
+--apiserver-advertise-address=10.0.2.15 \
+--image-repository registry.cn-hangzhou.aliyuncs.com/google_containers \
+--kubernetes-version v1.17.3 \
+--service-cidr=10.96.0.0/16 \
 --pod-network-cidr=10.244.0.0/16
 
 然后等待，得到以下结果：
@@ -527,26 +527,26 @@ Your Kubernetes control-plane has initialized successfully!
 
 To start using your cluster, you need to run the following as a regular user:
 
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 You should now deploy a pod network to the cluster.
 Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
-  （Flannel 是一个可以用于 Kubernetes 的 overlay 网络提供者。）
+https://kubernetes.io/docs/concepts/cluster-administration/addons/
+（Flannel 是一个可以用于 Kubernetes 的 overlay 网络提供者。）
 
 Then you can join any number of worker nodes by running the following on each as root:
 （用以下命令把其他节点加入集群）
 
 kubeadm join 10.0.2.15:6443 --token 47oiow.uuzn0idx2wc8q526 \
-    --discovery-token-ca-cert-hash sha256:e75d9e37b7f87ea6ec787d99427bff77f9e8ab0d9df7c8ef9b77f904b345a72c
+--discovery-token-ca-cert-hash sha256:e75d9e37b7f87ea6ec787d99427bff77f9e8ab0d9df7c8ef9b77f904b345a72c
 （
-    注意，在节点join的时候使用这个令牌，但是这个令牌只有2个小时的持续时间：按照以下命令生成新的：
-    kubeadm token create --print-join-command
-    kubeadm token create --ttl 0 --print-join-command
+注意，在节点join的时候使用这个令牌，但是这个令牌只有2个小时的持续时间：按照以下命令生成新的：
+kubeadm token create --print-join-command
+kubeadm token create --ttl 0 --print-join-command
 
-    得到：kubeadm join 10.0.2.15:6443 --token hnk85o.sruq0n6r24zcbh08     --discovery-token-ca-cert-hash sha256:e75d9e37b7f87ea6ec787d99427bff77f9e8ab0d9df7c8ef9b77f904b345a72c 
+    得到：kubeadm join 10.0.2.15:6443 --token hnk85o.sruq0n6r24zcbh08     --discovery-token-ca-cert-hash sha256:e75d9e37b7f87ea6ec787d99427bff77f9e8ab0d9df7c8ef9b77f904b345a72c
 
     解决很多问题
 ）
@@ -582,7 +582,7 @@ kubectl get pods
 现在模拟该部署的node节点宕机的情况：给该机器关机
 
 在这时候用master节点使用命令查看信息，可以看到一个terminal的和一个creating的：
-kubectl get pods -o wide 
+kubectl get pods -o wide
 
 给机器开机，再查看pods信息，可以看到正在清除这个宕机机器的tomcat镜像，因为不能让两台机器重复部署
 
@@ -664,3 +664,882 @@ kubectl apply -f tomcat6.yaml
 
 
 ```
+
+#### Industrial Management 环境搭建(操作系统最好选择支持nodejs18.14以上的，而不是选择centos7.9)
+1. Postgresql、pgadmin安装
+
+环境要求：
+x64, 8GB以上内存, 4核以上，100GB以上剩余空间, 可选访问公网(10MB/s以上网络带宽)
+
+安装之后目录如下，包含了pgAdmin 4：
+![Alt text](image.png)
+
+新建一个pgdata文件夹目录,之后开始安装：
+cd pgsql/bin
+
+pgdata的目录是F:\pgdata ,得到初始化数据库命令，设置数据存储位置，超级管理员账号:
+initdb.exe -D F:\pgdata -E UTF8 --locale=C -U postgres
+![Alt text](image-1.png)
+
+进入pgdata查看，新增了很多文件，-D F:\pgdata: 指定数据库集群的数据目录为 F:\pgdata。这是新数据库集群的根目录，所有 PostgreSQL 数据和配置文件都将存储在这个目录中。-E UTF8: 设置数据库集群的默认字符集编码为 UTF-8
+--locale=C: 设置数据库集群的默认区域设置（locale）为 C。-U postgres: 指定初始化数据库集群时创建的超级用户的用户名为 postgres。
+
+执行这个命令后，F:\pgdata 目录下将包含 PostgreSQL 数据库集群的各种文件和子目录，包括但不限于：
+```
+base/: 包含数据库的实际数据文件。
+pg_xlog/: 包含事务日志文件。
+pg_clog/: 包含事务控制日志文件。
+pg_wal/: 包含 Write-Ahead Logging (WAL) 文件。
+pg_tblspc/: 用于存储表空间的目录。
+pg_twophase/: 包含两阶段提交的文件。
+pg_stat/: 包含统计信息文件。
+pg_log/: 包含日志文件。
+postgresql.conf: PostgreSQL 的主配置文件。
+pg_hba.conf: 数据库防火墙，用于控制身份验证的配置文件。
+pg_ident.conf: 用于身份映射的配置文件。
+```
+
+将以下内容增加到postgresql.conf文件末尾：
+```
+listen_addresses = '0.0.0.0'
+port = 1921
+max_connections = 200
+tcp_keepalives_idle = 60
+tcp_keepalives_interval = 10
+tcp_keepalives_count = 6
+shared_buffers = 512MB
+maintenance_work_mem = 64MB
+dynamic_shared_memory_type = windows
+vacuum_cost_delay = 0
+bgwriter_delay = 10ms
+bgwriter_lru_maxpages = 1000
+bgwriter_lru_multiplier = 5.0
+bgwriter_flush_after = 0
+old_snapshot_threshold = -1
+wal_level = minimal
+max_wal_senders = 0  # 如果max_wal_senders大于0，需要设置wal_level至少为replica级别。 PG 10开始，max_wal_senders默认值为10，以前的版本默认为0。
+synchronous_commit = off
+full_page_writes = on
+wal_buffers = 64MB
+wal_writer_delay = 10ms
+wal_writer_flush_after = 4MB
+checkpoint_timeout = 35min
+max_wal_size = 2GB
+min_wal_size = 80MB
+checkpoint_completion_target = 0.1
+checkpoint_flush_after = 0
+random_page_cost = 1.5
+log_destination = 'csvlog'
+logging_collector = on
+log_directory = 'pg_log'
+log_truncate_on_rotation = on
+log_checkpoints = on
+log_connections = on
+log_disconnections = on
+log_error_verbosity = verbose
+log_temp_files = 8192
+log_timezone = 'Asia/Hong_Kong'
+autovacuum = on
+log_autovacuum_min_duration = 0
+autovacuum_naptime = 20s
+autovacuum_vacuum_scale_factor = 0.05
+autovacuum_freeze_max_age = 1500000000
+autovacuum_multixact_freeze_max_age = 1600000000
+autovacuum_vacuum_cost_delay = 0
+vacuum_freeze_table_age = 1400000000
+vacuum_multixact_freeze_table_age = 1500000000
+datestyle = 'iso, mdy'
+timezone = 'Asia/Hong_Kong'
+lc_messages = 'C'
+lc_monetary = 'C'
+lc_numeric = 'C'
+lc_time = 'C'
+default_text_search_config = 'pg_catalog.english'
+```
+
+将以下内容添加到pg_hba.conf文件末尾，允许网络用户通过用户密码访问postgresql数据库：
+```
+host all all 0.0.0.0/0 md5
+```
+
+启动并配置开机自动启动postgresql数据库集群：
+```
+pg_ctl.exe start -D F:\pgdata
+
+```
+
+程序注意别关了，编写start_pg.bat开机自启动文件：
+
+```
+@echo off
+cd "F:\pgsql\bin"   # 这里替换为你的 PostgreSQL 安装路径
+pg_ctl.exe start -D F:\pgdata
+```
+关闭集群：pg_ctl.exe stop -m fast -D "F:\pgdata"
+连接数据库：
+```
+psql -h 127.0.0.1 -p 1921 -U postgres postgres
+```
+更正 pg_hba.conf的追加命令host all all 0.0.0.0/0 md5  注释掉 否则说读不出来这个文件
+
+端口号选择默认5432，因此连接命令变为   psql  -U postgres postgres
+
+新增一个超级用户：
+先输入 \dt
+
+create role postgresql login superuser encrypted password "postgresql"
+
+输入 \du+ 查看用户
+
+
+草：django.db.utils.NotSupportedError: PostgreSQL 12 or later is required (found 9.602).
+
+### 以上Industrial Management 环境搭建==在吹牛
+
+#### IoT平台搭建
+Industrial Management 环境搭建
+#### 一、linux安装redis（5.0.10）
+```
+tar: 这是 Linux/Unix 系统上用于压缩和解压缩文件的命令。
+
+-z: 表示使用 gzip 格式进行压缩/解压缩。
+-x: 表示提取（解压缩）文件。
+-v: 表示详细输出，显示正在处理的文件列表。
+-f: 后面跟着的是要处理的文件的名称。
+```
+1 官网 https://redis.io/download
+2 mkdir /root/redis, cd /root/redis , Redis 默认安装路径是/usr/local/bin
+3 安装网络下载命令wget：yum install wget
+2 wget http://download.redis.io/releases/redis-5.0.10.tar.gz
+3 tar -zxf redis
+4 由于redis是由C语言编写的，它的运行需要C环境，所以编译前需安装 gcc , yum install gcc-c++
+5 编译安装：cd redis-5.0.10 ,  make && make install
+6 将src文件夹下的redis-server脚本移动到bin目录：cp src/redis-server /bin    将redis.conf移动到etc文件夹：mv redis.conf /etc
+7 修改redis.conf:
+```
+        #设置外部可连接redis服务
+        protected-mode no
+        #开启后台启动
+        daemonize yes
+        #bind 127.0.0.1
+```
+
+8 启动redis    /bin/redis-server /etc/redis.conf
+
+#### 二、mysql 5.7
+1 检查系统是否已经安装mysql: rpm -qa | grep mariadb, mysql  如果有就删除：yum remove mariadb-xxx
+2 mkdir /opt/soft，cd /opt/soft, 将tar文件移动至这个文件夹，解压：tar -zxvf mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz
+3 mv mysql-5.7.28-linux-glibc2.12-x86_64 mysql-5.7.28
+4 cd /usr/local , 添加环境变量命令: ln -s /opt/soft/mysql-5.7.28 mysql
+5 添加mysql用户，修改mysql目录权限，并用此用户执行应用  (不，直接root用户)
+```
+useradd -s /bin/false -M mysql
+cd /opt/soft
+chown -R mysql:mysql mysql-5.7.28
+```
+6 yum install vim, vim /etc/my.conf 写入my.conf配置文件：
+```
+[mysqld]
+# binlog 配置
+log-bin=/usr/local/mysql/logs/mysql-bin.log
+expire-logs-days=14
+max-binlog-size=500M
+server-id=1
+# GENERAL
+basedir=/usr/local/mysql
+datadir=/usr/local/mysql/data
+socket=/usr/local/mysql/mysql.sock
+user=mysql
+default-storage-engine=InnoDB
+character-set-server=utf8
+lower_case_table_names = 1
+explicit_defaults_for_timestamp=true
+[mysqld_safe]
+log-error=/usr/local/mysql/mysql-error.log
+pid-file=/usr/local/mysql/mysqld.pid
+[client]
+socket=/usr/local/mysql/mysql.sock
+[mysql]
+default-character-set=utf8
+socket=/usr/local/mysql/mysql.sock
+```
+7 cd /opt/soft/mysql-5.7.28 ， 安装mysql
+为了避免出错，先执行这几个命令：
+错误：在my.cnf中指定的binlog配置文件的logs文件夹不存在  解决：mkdir /usr/local/mysql/logs  chown -R mysql:mysql /usr/local/mysql/logs
+yum -y install autoconf
+```
+bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+```
+出现 A temporary password is generated for root@localhost: t6+K=sfTReg6，代表成功，保存一下临时密码
+
+8 拷贝启动程序，将mysql的启动程序拷贝到/etc/init.d/目录下
+9 启动mysql
+service mysqld start
+
+10 配置环境变量，编辑/etc/profile，方便在任何地方用mysql命令  vim /etc/profile
+```
+#mysql
+export MYSQL_HOME=/usr/local/mysql
+export PATH=$PATH:$MYSQL_HOME/bin
+```
+11 重新编译   source /etc/profile
+
+12 登录mysql，修改密码 mysql -uroot -p
+输入刚刚保存的临时密码
+
+13 首次进入mysql需要修改密码：
+```
+alter user 'root'@'localhost' identified by '252525tyl';
+flush privileges;
+```
+
+14 配置远程访问权限：
+```
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '252525tyl' ;
+flush privileges;
+```
+#### 三、 jdk8
+1 查看是否默认jdk
+```
+rpm -qa | grep java
+rpm -qa | grep jdk
+rpm -qa | grep gcj
+```
+2 创建目录 mkdir -p /usr/java/ && cd /usr/java/
+3 解压 tar -zxvf jdk-8u241-linux-x64.tar.gz
+
+3 配置环境变量：vi /etc/profile
+```
+# java8
+export JAVA_HOME=/usr/java/jdk1.8.0_391  (注意版本号要对上自己下载的java包)
+export PATH=$JAVA_HOME/bin:$PATH
+```
+4 重新编译   source /etc/profile， 验证安装 java -version
+
+#### 四、 elasticsearch 7.4.2
+
+1 下载 elasticsearch 和其分词器的压缩包，注意版本保持一致。
+```
+[root@localhost ~]# cd /usr/local/src/
+[root@localhost src]# wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.4.2-linux-x86_64.tar.gz
+[root@localhost src]# tar -zxf elasticsearch-7.4.2-linux-x86_64.tar.gz -C ../     这是 tar 命令的另一个选项，指定提取文件的目标目录。
+[root@localhost src]# cd ../
+    接下来在/usr/local 目录下创建一个名为 elasticsearch 的符号链接，该链接指向 /usr/local/elasticsearch-7.4.2/ 目录。这样做的好处之一是，通过使用符号链接，你可以轻松地更改 Elasticsearch 的版本如7.4.3或者7.4.4，而不必更改所有与 /usr/local/elasticsearch 相关的路径:
+[root@localhost local]# ln -s /usr/local/elasticsearch-7.4.2/ /usr/local/elasticsearch
+    这里环境变量和上面的两行不一样，这个 没有用%es_home%这种格式
+[root@localhost local]# echo 'export PATH=/usr/local/elasticsearch/bin:$PATH' >>/etc/profile
+[root@localhost local]# source /etc/profile
+[root@localhost local]# mkdir -p elasticsearch/plugins/ik      递归的创建ik分词库，因为plugins文件夹不存在
+[root@localhost local]# cd elasticsearch/plugins/ik
+[root@localhost ik]# wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.4.2/elasticsearch-analysis-ik-7.4.2.zip
+[root@localhost ik]# unzip elasticsearch-analysis-ik-7.4.2.zip
+[root@localhost ik]# rm elasticsearch-analysis-ik-7.4.2.zip
+```
+
+2  elasticsearch 默认禁止使用 root 启动。创建普通账户 es 并授权。
+```
+[root@es ik]# cd /usr/local/
+[root@es local]# useradd es
+[root@es local]# passwd es
+[root@es local]# chown -R es elasticsearch*
+```
+
+3 切换为 es 普通用户修改配置并启动 elasticsearch。
+```
+[root@es local]# su - es
+[es@es ~]$ cd /usr/local/elasticsearch/config/
+[es@es config]$ cp elasticsearch.yml{,.bak}  复制elasticsearch.yml文件，并将副本命名为elasticsearch.yml.bak。
+[es@es config]$ vim elasticsearch.yml
+network.host: 0.0.0.0
+[es@es config]$ elasticsearch
+ERROR: [3] bootstrap checks failed
+[1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65535]
+[2]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+[3]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes] must be configured
+```
+
+4 -------------------------------------------------解决报错-------------------------------------------------
+```
+su - root
+# 解决第一个报错：
+[root@es ~]# vim /etc/security/limits.conf        # 追加如下内容，修改了limits.conf，不需要重启，但是需要重新登录才能生效。
+soft nofile 65536
+hard nofile 65536
+这两句是错误的
+正确应该用*表示所有用户，或者用es表示：
+* soft nofile 65536
+* hard nofile 65536
+# 解决第二个报错：
+[root@es ~]# vim /etc/sysctl.conf        # 追加如下内容
+vm.max_map_count=655360
+[root@es ~]# sysctl -p        # 使配置生效
+# 解决第三个报错：
+[root@es ~]# vim /usr/local/elasticsearch/config/elasticsearch.yml
+cluster.initial_master_nodes: ["node-1"]                # 取消本行注释并修改只保留一个节点。
+```
+
+5 重新启动 elasticsearch
+```
+su -es
+elasticsearch
+```
+6 启动成功输出日志， Ctrl+c 中止掉，以 daemon 方式启动,  验证安装的插件和 elasticsearch 服务。
+```
+[es@es ~]$ elasticsearch -d
+curl http://localhost:9200
+```
+
+
+---------------------------------------解决es的一系列问题：docker安装集群es：---------------------------------------
+
+1 删除原有docker：yum remove docker docker-client docker-client-latest  docker-common  docker-latest  docker-latest-logrotate docker-logrotate docker-engine
+2 安装依赖包：yum install -y yum-utils device-mapper-persistent-data  lvm2
+3 添加docker仓库：yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+```
+File "/usr/bin/yum-config-manager", line 135
+except yum.Errors.RepoError, e:
+解决：vim /usr/bin/yum-config-manager, 将python改成python2
+```
+4 安装：yum install -y docker-ce docker-ce-cli containerd.io              , docker -v
+查看开机自启动： systemctl list-unit-files | grep docker
+设置开机自启动： systemctl start docker, systemctl enable docker
+
+5 开始安装ES：
+```
+docker pull elasticsearch:7.4.2
+docker pull kibana:7.4.2
+```
+6 配置挂载数据文件夹
+```
+# 创建配置文件目录
+mkdir -p /mydata/elasticsearch/config
+# 创建数据目录
+mkdir -p /mydata/elasticsearch/data
+# 将/mydata/elasticsearch/文件夹中文件都可读可写
+chmod -R 777 /mydata/elasticsearch/
+# 配置任意机器可以访问 elasticsearch
+echo "http.host: 0.0.0.0" >/mydata/elasticsearch/config/elasticsearch.yml
+```
+7 启动ES
+```
+docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e  "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms64m -Xmx512m" -v /mydata/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v /mydata/elasticsearch/data:/usr/share/elasticsearch/data -v  /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins -d elasticsearch:7.4.2
+```
+
+8 启动可视化Kibana：docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.44.128:9200 -p 5601:5601 -d kibana:7.4.2
+9 设置ES,kibana随docker自启动：docker update elasticsearch --restart=always, docker update kibana --restart=always
+
+#### 五、nginx 1.24.0
+1 下载包 mkdir /usr/local/nginx & cd /usr/local/nginx
+wget -c https://nginx.org/download/nginx-1.24.0.tar.gz     -c:（continue）如果文件已经存在，并且部分已经下载，-c 选项允许断点续传
+
+tar -zxf nginx-1.24.0.tar.gz
+
+2 安装nginx依赖工具包环境
+yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel
+
+3 配置nginx及安装环境
+
+```
+    #配置nginx到指定目录（不需要SSL）
+        <如已经安装好，却在后期要用https协议，即SSL，又不想重装，参考此方法（亲测有效）：
+        https://blog.csdn.net/Xiaoxin_Java/article/details/119187418>
+./configure --prefix=/opt/nginx
+    #配置nginx到指定目录（需要SSL）
+./configure --prefix=/opt/nginx --with-http_stub_status_module --with-http_ssl_module
+```
+4 编译安装：make & make install    make构建项目，而 make install 用于将构建好的项目安装到系统中
+
+5 配置nginx环境变量：
+```
+echo 'export PATH=/opt/nginx/sbin:$PATH' >>/etc/profile
+source  /etc/profile
+```
+
+6 设置开机启动nginx：
+```
+echo '/opt/nginx/sbin/nginx' >>/etc/rc.local
+chmod 755 /etc/rc.local
+```
+
+#### 6 nodejs18 和yarn：
+
+由于官方升级了官方工具链，导致nodejs18无法在centos7中使用。
+但根据实际测试来看，完全可以继续使用
+当然centos7的支持生命周期也即将结束，不过因为国内的特殊原因，太多老系统仍然继续使用centos7
+我们可以自己编译nodejs18
+```
+yum makecache
+yum install -y centos-release-scl
+yum install -y devtoolset-11 # 选择新一些的工具链 测试了完全没问题
+yum install -y ninja-build # 安装ninja 会让编译快很多 nodejs支持使用ninja编译
+出错，没有ninja包，解决 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+再次执行yum install -y ninja-build
+scl enable devtoolset-11 bash # or zsh
+
+# 可以 clone nodejs 源码了
+git clone https://github.com/nodejs/node.git(不git，到网页上选择v18.14的版本)
+cd node
+# 切换到对应的分支 建议看一下 commit 切换到对应的 commit 上 否则会有 pre 标记
+git checkout v18.x
+
+./configure --ninja # 推荐使用 ninja 编译  出错：Node.js configure: Found Python 2.7.5...Please use  python3.6 or higher version
+进入下面的python3.9.5安装，安装完成再回来重新执行  ./configure --ninja
+make（很慢）
+out/Release/node -v
+out/Release/cctest
+
+# 1.编辑环境变量
+vim /etc/profile
+# 2.添加环境变量
+export PATH=/usr/local/NodeJS/node/out/Release:$PATH
+# 3.使配置生效
+source /etc/profile
+# 4.配置软链接
+ln -s /usr/local/NodeJS/node/out/Release/node /usr/local/bin/
+
+# 5.查看版本
+node -v
+
+```
+升级python3.9.5:
+yum -y install gcc python36-devel bzip2-devel sqlite-devel openssl-devel readline-devel xz-devel xz-devel tk-devel gdbm-devel libffi-devel
+cd /usr/local/src
+wget https://www.python.org/ftp/python/3.9.5/Python-3.9.5.tgz
+tar -zxf Python-3.9.5.tgz
+cd Python-3.9.5/
+./configure --prefix=/usr/local/python3.9 --with-ssl
+make && make install
+
+ln -fs /usr/local/python3.9/bin/python3.9 /usr/bin/python
+ln -fs /usr/local/python3.9/bin/python3.9 /usr/bin/python3
+ln -fs /usr/local/python3.9/bin/pip3.9 /usr/bin/pip
+ln -fs /usr/local/python3.9/bin/pip3.9 /usr/bin/pip3
+
+修改yum文件
+vim /usr/bin/yum
+vim /usr/libexec/urlgrabber-ext-down (原因是安装了python3.8,CentOS 7.X 自带的yum采用的是python2.X，当系统将python升级到2.7 或3.X后，出现语法解释错误)
+
+第一行都修改为:
+#!/usr/bin/python2.7
+
+解决 Can't locate Tcl/Tk libs and/or headers
+yum install -y tcl-devel tk-devel
+解决_ssl问题
+yum install -y openssl-devel
+
+安装yarn:
+```
+mkdir -p /usr/local/NodeJS/yarn/yarn-v1.22.19
+
+wget https://github.com/yarnpkg/yarn/releases/download/v1.22.19/yarn-v1.22.19.tar.gz
+
+tar -zxf yarn-v1.22.19.tar.gz -C /usr/local/NodeJS/yarn
+
+echo 'export PATH=/usr/local/NodeJS/yarn/yarn-v1.22.19/bin:$PATH'>>/etc/profile
+source /etc/profile
+```
+npm uninstall yarn -g
+npm install yarn@1.22.19
+yarn,  yarn run dev, yarn build
+注意，如果yarn的时候提示磁盘空间不足，那就是真的空间不足，把yarn的文件夹搬到另一个有空间的根目录下面
+
+还有，windows系统下yarn的文件不能在linux系统之下进行yarn run dev
+
+
+
+#### IDEA导入文件名爆红：File->Setting->version control == none
+
+cd jetlinks-community/jetlinks-standalone/target
+
+java -jar -Xms4G -Xmx4G -XX:+UseG1GC jetlinks-standalone.jar
+
+#### 简单功能
+```
+---jetlinks-community
+------|---jetlinks-components   # 组件库
+------|-------|----common-component # 通用组件.工具类等
+------|-------|----configure-component # 统一配置模块
+------|-------|----dashboard-component # 仪表盘模块
+------|-------|----elasticsearch-component # ElasticSearch集成
+------|-------|----gateway-component # 网关模块,统一定义网关接口等信息
+------|-------|----io-component # IO模块,文件管理等
+------|-------|----logging-component # 日志模块
+------|-------|----network-component # 网络组件模块,统一定义网络组件规范以及默认实现
+------|-------|-------|---http-component # http模块
+------|-------|-------|---mqtt-component # mqtt模块
+------|-------|-------|---network-core # 网络组件核心模块
+------|-------|-------|---tcp-component # tcp模块
+------|-------|----notify-component # 通知模块,统一定义通知规范以及默认实现
+------|-------|-------|---notify-core # 通知模块核心
+------|-------|-------|---notify-dingtalk # 钉钉通知模块
+------|-------|-------|---notify-email # 邮件通知模块
+------|-------|-------|---notify-sms # 短信通知模块
+------|-------|-------|---notify-voice # 语音通知模块
+------|-------|-------|---notify-webhook # webhook通知模块
+------|-------|-------|---notify-wechat # 微信通知模块
+------|-------|----protocol-component # 协议模块
+------|-------|----relation-component # 关系模块,用于描述物与物之间的关系
+------|-------|----rule-engine-component # 规则引擎模块,集成规则引擎通用功能
+------|-------|----script-component # 脚本模块,封装脚本引擎
+------|-------|----tdengine-component # 对tdengine的支持
+------|-------|----things-component # 物管理模块
+------|-------|----timeseries-component # 时序数据组件
+------|---jetlinks-manager  # 管理功能
+------|-------|----authentication-manager   # 用户,权限管理模块
+------|-------|---- device-manager   # 设备管理模块
+------|-------|---- logging-manager   # 日志管理模块
+------|-------|---- network-manager   # 网络组件管理模块
+------|-------|----notify-manager   # 通知管理模块
+------|-------|----rule-engine-manager   # 规则引擎管理模块
+------|---jetlinks-standalone  #单例模块 启动JetLinks平台
+------|---simulator # 设备模拟器(已弃用);请使用新的设备模拟器 https://github.com/jetlinks/device-simulator
+问题描述：本人向运行商申请了公网IP后，希望可以在外远程自己家中的电脑。但是在第一次远程的时候，发现已经连接成功，自己电脑也因为远程登录而注销（说明连接成功）了，但是我远程的屏幕仍然是黑屏。解决方案：尝试了网上诸多复制粘贴的解决方案无果。偶然间解决其他问题时，发现问题被修复。经过多次尝试，发现解决办法
+现附上解决方案流程：运行 -> 输入gpedit.msc，
+先进入 wimdows设置 -> 安全设置 -> 本地策略 -> 安全选项 -> 账户： 允许空账户密码登录
+
+再进入 管理模板 -> Windows组件 -> 远程桌面服务 -> 远程桌面会话主机 -> 安全 -> 远程(RDP)连接要求使用指定的安全层，启用并把安全层改为RDP，测试完成。
+
+@GeneratedValue注解，用于指定如何生成主键: generator = Generators.SNOW_FLAKE
+@Column注解 ： name, length
+@EnumCodec注解 ： 这个注解下放的实体需要的是比如 enum DeviceState
+@ColumnType注解 ：javaType = String.class 这个只有在注解给自定义类的时候需要加上, jdbcType = JDBCType.LONGVARCHAR
+@NotBlank注解 ：message = "", groups = CreateGroup.class
+@Scheme注解 ： description = "", accessMode = Scheme.AccessMode.READ_ONLY, defaultValue = "notActive"
+@DefaultValue : "", generator = Generators.CURRENT_TIME
+@Deprecated注解 ： 使用这个注解将该实体（对应表生成）弃用
+
+
+
+```
+#### 升级开发
+```
+---jetlinks-pro
+------|---dist # docker容器部署配置文件
+------|---expands-components # 付费扩展模块
+------|-------|----jetlinks-aliyun-bridge-gateway # 阿里云IoT平台接入
+------|-------|----jetlinks-ctwing # 电信Ctwing物联网平台对接
+------|-------|----jetlinks-dueros # 小度智能家居开放平台集成
+------|-------|----jetlinks-edge # 边缘网关模块
+------|-------|-------|---edge-agent # 边缘端模块
+------|-------|-------|---edge-collector # 边缘端数据采集模块
+------|-------|-------|---edge-core # 边缘网关核心模块
+------|-------|-------|---edge-device # 边缘网关设备接入模块
+------|-------|-------|---edge-master # 边缘网关平台管理端模块
+------|-------|-------|---edge-media # 边缘流媒体模块,用于在边缘网关中接入视频设备
+------|-------|-------|---edge-rule-engine # 边缘网关规则引擎模块
+------|-------|----jetlinks-media # 视频中心模块,实现GBT-28181相关协议功能。
+------|-------|----jetlinks-modbus # 通过modbus接入设备
+------|-------|----jetlinks-onenet # 移动OneNet平台对接
+------|-------|----jetlinks-opc-ua # 通过OPC-UA接入设备
+------|---jetlinks-components   # 组件库
+------|-------|----api-component # api模块 对API鉴权,swagger等集成
+------|-------|----application-component # 应用管理模块
+------|-------|----assets-component # 资产模块 对数据权限控制的支持
+------|-------|----cassandra-component # cassandra集成 对cassandra的支持
+------|-------|----clickhouse-component # clickhouse集成 对clickhouse的支持
+------|-------|----collector-component # 数据采集器模块 统一定义平台主动采集的规范以及相关接口
+------|-------|----common-component # 通用组件.工具类等
+------|-------|----configure-component # 统一配置模块
+------|-------|----dashboard-component # 仪表盘模块
+------|-------|----datasource-component # 数据源管理配置模块
+------|-------|----elasticsearch-component # ElasticSearch集成
+------|-------|----function-component # 函数模块
+------|-------|----gateway-component # 网关模块,统一定义网关接口等信息
+------|-------|----geo-component # 地理位置模块
+------|-------|----influxdb-component # 对influxdb的支持
+------|-------|----io-component # IO模块,文件管理等
+------|-------|----logging-component # 日志模块
+------|-------|----messaging-component # 消息模块,集成消息队列等
+------|-------|-------|---kafka-component # Kafka模块
+------|-------|-------|---rabbitmq-component # RabbitMQ模块
+------|-------|----network-component # 网络组件模块,统一定义网络组件规范以及默认实现
+------|-------|-------|---coap-component # coap模块
+------|-------|-------|---http-component # http模块
+------|-------|-------|---mqtt-component # mqtt模块
+------|-------|-------|---network-core # 网络组件核心模块
+------|-------|-------|---serialport-component # 串口模块
+------|-------|-------|---simulator-component # 模拟器模块
+------|-------|-------|---tcp-component # tcp模块
+------|-------|-------|---udp-component # udp模块
+------|-------|-------|---websocket-component # websocket模块
+------|-------|----notify-component # 通知模块,统一定义通知规范以及默认实现
+------|-------|-------|---notify-core # 通知模块核心
+------|-------|-------|---notify-dingtalk # 钉钉通知模块
+------|-------|-------|---notify-email # 邮件通知模块
+------|-------|-------|---notify-sms # 短信通知模块
+------|-------|-------|---notify-voice # 语音通知模块
+------|-------|-------|---notify-webhook # webhook通知模块
+------|-------|-------|---notify-wechat # 微信通知模块
+------|-------|----plugin-component # 插件模块
+------|-------|----protocol-component # 协议模块
+------|-------|----relation-component # 关系模块,用于描述物与物之间的关系
+------|-------|----rule-engine-component # 规则引擎模块,集成规则引擎通用功能
+------|-------|----script-component # 脚本模块,封装脚本引擎
+------|-------|----streaming-component # 流式计算模块(暂未实现)
+------|-------|----tdengine-component # 对tdengine的支持
+------|-------|----tenant-component # 租户模块(已弃用)
+------|-------|----test-component # 测试模块
+------|-------|----things-component # 物管理模块
+------|-------|----timeseries-component # 时序数据组件
+------|---jetlinks-manager  # 管理功能
+------|-------|----authentication-manager   # 用户,权限管理模块
+------|-------|----datasource-manager   # 数据源管理模块
+------|-------|----device-manager   # 设备管理模块
+------|-------|----logging-manager   # 日志管理模块
+------|-------|----network-card-manager   # 物联网卡管理模块，统一管理电信，移动物联网卡。
+------|-------|----network-manager   # 网络组件管理模块
+------|-------|----notify-manager   # 通知管理模块
+------|-------|----rule-engine-manager   # 规则引擎管理模块
+------|-------|----things-manager   # 物管理模块
+------|---jetlinks-parent   # 父模块,统一依赖管理
+------|---jetlinks-standalone  #单例模块 启动JetLinks平台
+# 设备接入协议开发	根据提供的设备型号，编写并提供接入平台协议包的源码。
+```
+
+### NI DAQ PXI-5421 python测试
+
+NI DAQ（数据采集）设备是一种用于测量和控制各种物理量的设备，例如电压、电流、温度、压力等。
+
+PXI-5421是一种43 MHz任意波形发生器，能够生成用户定义的任意波形和标准函数，包括正弦、方波、三角波和斜坡波。这个任意波形发生器可以生成-6 V到+6 V的信号，并使用直接数字合成（DDS）精确地生成波形
+
+NI DAQ设备和PXI-5421可以通过NI-DAQmx驱动程序进行编程控制。NI-DAQmx是NI公司提供的一种用于编程控制NI数据采集硬件的软件。NI-DAQmx提供了一组可重用的函数和属性，可用于配置、控制和读取NI数据采集硬件的各种功能
+使用Python调用NI DAQmx
+一、硬件：
+笔记本电脑Windows 10系统
+NI USB-6000
+
+二、软件：
+（1）Python版本3.9
+（2）NI DAQmx16.0
+
+
+![Alt text](image-3.png)
+
+
+查看板卡对应的设备名称:
+
+![Alt text](image-2.png)
+
+（3）安装Python下的DAQmx，使用pip install DAQmx进行安装。
+
+三、参考链接：
+NI DAQmx Python API说明参考：
+https://nidaqmx-python.readthedocs.io/en/latest/index.html
+Control NI DAQ Device with Python and NI DAQmx
+https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z0000019Pf1SAE&l=zh-CN
+
+
+四、代码示例
+```
+import nidaqmx
+import pprint
+import numpy as np
+from matplotlib import pyplot as plt
+
+pp = pprint.PrettyPrinter(indent=4)
+
+
+with nidaqmx.Task() as task:
+    task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+
+    print('1 Channel 1 Sample Read: ')
+    data = task.read()
+    pp.pprint(data)
+
+    data = task.read(number_of_samples_per_channel=1)
+    pp.pprint(data)
+
+    print('1 Channel N Samples Read: ')
+    data = task.read(number_of_samples_per_channel=10)
+    x=np.arange(0,len(data))
+    pp.pprint(data)
+    plt.plot(x,data)
+
+    task.ai_channels.add_ai_voltage_chan("Dev1/ai1")
+
+    print('N Channel 1 Sample Read: ')
+    data = task.read()
+    pp.pprint(data)
+
+    print('N Channel N Samples Read: ')
+    data = task.read(number_of_samples_per_channel=2)
+    pp.pprint(data)
+```
+执行结果如下：
+
+![Alt text](image-1.png)
+
+五、示例2：
+
+```
+import nidaqmx
+import tkinter as tk
+from tkinter import ttk
+
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
+
+class voltageContinuousInput(tk.Frame):
+
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+
+        #Configure root tk class
+        self.master = master
+        self.master.title("Voltage - Continuous Input")
+        self.master.iconbitmap("Voltage - Continuous Input.ico")
+        self.master.geometry("1100x600")
+
+        self.create_widgets()
+        self.pack()
+        self.run = False
+
+    def create_widgets(self):
+        #The main frame is made up of three subframes
+        self.channelSettingsFrame = channelSettings(self, title ="Channel Settings")
+        self.channelSettingsFrame.grid(row=0, column=1, sticky="ew", pady=(20,0), padx=(20,20), ipady=10)
+
+        self.inputSettingsFrame = inputSettings(self, title="Input Settings")
+        self.inputSettingsFrame.grid(row=1, column=1, pady=(20,0), padx=(20,20), ipady=10)
+
+        self.graphDataFrame = graphData(self)
+        self.graphDataFrame.grid(row=0, rowspan=2, column=2, pady=(20,0), ipady=10)
+
+
+    def startTask(self):
+        #Prevent user from starting task a second time
+        self.inputSettingsFrame.startButton['state'] = 'disabled'
+
+        #Shared flag to alert task if it should stop
+        self.continueRunning = True
+
+        #Get task settings from the user
+        physicalChannel = self.channelSettingsFrame.physicalChannelEntry.get()
+        maxVoltage = int(self.channelSettingsFrame.maxVoltageEntry.get())
+        minVoltage = int(self.channelSettingsFrame.minVoltageEntry.get())
+        sampleRate = int(self.inputSettingsFrame.sampleRateEntry.get())
+        self.numberOfSamples = int(self.inputSettingsFrame.numberOfSamplesEntry.get()) #Have to share number of samples with runTask
+
+        #Create and start task
+        self.task = nidaqmx.Task()
+        self.task.ai_channels.add_ai_voltage_chan(physicalChannel, min_val=minVoltage, max_val=maxVoltage)
+        self.task.timing.cfg_samp_clk_timing(sampleRate,sample_mode=nidaqmx.constants.AcquisitionType.CONTINUOUS,samps_per_chan=self.numberOfSamples*3)
+        self.task.start()
+
+        #spin off call to check
+        self.master.after(10, self.runTask)
+
+    def runTask(self):
+        #Check if task needs to update the graph
+        samplesAvailable = self.task._in_stream.avail_samp_per_chan
+        if(samplesAvailable >= self.numberOfSamples):
+            vals = self.task.read(self.numberOfSamples)
+            self.graphDataFrame.ax.cla()
+            self.graphDataFrame.ax.set_title("Acquired Data")
+            self.graphDataFrame.ax.plot(vals)
+            self.graphDataFrame.graph.draw()
+
+        #check if the task should sleep or stop
+        if(self.continueRunning):
+            self.master.after(10, self.runTask)
+        else:
+            self.task.stop()
+            self.task.close()
+            self.inputSettingsFrame.startButton['state'] = 'enabled'
+
+    def stopTask(self):
+        #call back for the "stop task" button
+        self.continueRunning = False
+
+class channelSettings(tk.LabelFrame):
+
+    def __init__(self, parent, title):
+        tk.LabelFrame.__init__(self, parent, text=title, labelanchor='n')
+        self.parent = parent
+        self.grid_columnconfigure(0, weight=1)
+        self.xPadding = (30,30)
+        self.create_widgets()
+
+    def create_widgets(self):
+
+        self.physicalChannelLabel = ttk.Label(self, text="Physical Channel")
+        self.physicalChannelLabel.grid(row=0,sticky='w', padx=self.xPadding, pady=(10,0))
+
+        self.physicalChannelEntry = ttk.Entry(self)
+        self.physicalChannelEntry.insert(0, "Dev1/ai0")
+        self.physicalChannelEntry.grid(row=1, sticky="ew", padx=self.xPadding)
+
+        self.maxVoltageLabel = ttk.Label(self, text="Max Voltage")
+        self.maxVoltageLabel.grid(row=2,sticky='w', padx=self.xPadding, pady=(10,0))
+
+        self.maxVoltageEntry = ttk.Entry(self)
+        self.maxVoltageEntry.insert(0, "10")
+        self.maxVoltageEntry.grid(row=3, sticky="ew", padx=self.xPadding)
+
+        self.minVoltageLabel = ttk.Label(self, text="Min Voltage")
+        self.minVoltageLabel.grid(row=4,  sticky='w', padx=self.xPadding,pady=(10,0))
+
+        self.minVoltageEntry = ttk.Entry(self)
+        self.minVoltageEntry.insert(0, "-10")
+        self.minVoltageEntry.grid(row=5, sticky="ew", padx=self.xPadding,pady=(0,10))
+
+class inputSettings(tk.LabelFrame):
+
+    def __init__(self, parent, title):
+        tk.LabelFrame.__init__(self, parent, text=title, labelanchor='n')
+        self.parent = parent
+        self.xPadding = (30,30)
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.sampleRateLabel = ttk.Label(self, text="Sample Rate")
+        self.sampleRateLabel.grid(row=0, column=0, columnspan=2, sticky='w', padx=self.xPadding, pady=(10,0))
+
+        self.sampleRateEntry = ttk.Entry(self)
+        self.sampleRateEntry.insert(0, "1000")
+        self.sampleRateEntry.grid(row=1, column=0, columnspan=2, sticky='ew', padx=self.xPadding)
+
+        self.numberOfSamplesLabel = ttk.Label(self, text="Number of Samples")
+        self.numberOfSamplesLabel.grid(row=2, column=0, columnspan=2, sticky='w', padx=self.xPadding, pady=(10,0))
+
+        self.numberOfSamplesEntry = ttk.Entry(self)
+        self.numberOfSamplesEntry.insert(0, "100")
+        self.numberOfSamplesEntry.grid(row=3, column=0, columnspan=2, sticky='ew', padx=self.xPadding)
+
+        self.startButton = ttk.Button(self, text="Start Task", command=self.parent.startTask)
+        self.startButton.grid(row=4, column=0, sticky='w', padx=self.xPadding, pady=(10,0))
+
+        self.stopButton = ttk.Button(self, text="Stop Task", command=self.parent.stopTask)
+        self.stopButton.grid(row=4, column=1, sticky='e', padx=self.xPadding, pady=(10,0))
+
+class graphData(tk.Frame):
+
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent)
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.graphTitle = ttk.Label(self, text="Voltage Input")
+        self.fig = Figure(figsize=(7,5), dpi=100)
+        self.ax = self.fig.add_subplot(1,1,1)
+        self.ax.set_title("Acquired Data")
+        self.graph = FigureCanvasTkAgg(self.fig, self)
+        self.graph.draw()
+        self.graph.get_tk_widget().pack()
+
+#Creates the tk class and primary application "voltageContinuousInput"
+root = tk.Tk()
+app = voltageContinuousInput(root)
+
+#start the application
+app.mainloop()
+```
+
+![Alt text](image.png)
+
+
+NI 官方支持的 DAQmx 软件包 nidaqmx 于 2017 年发布，仅适用于 Windows。nidaqmx 使用 ctypes 封装了 DAQmx C API。我们这段代码提供了比 NI 提供的示例更详细的示例，还展示了如何将动态绘图与数据采集相结合。如果希望在 Linux 上使用 NI 硬件，可以试试 PyDAQmx。
+例如，最大采样率不同，并非所有设备都有时钟数字线等。某些示例可能无法在某些设备上运行。如果使用的是 USB DAQ，请记住这些设备是针对数据吞吐量而非响应延迟进行优化的。我们不希望每秒执行任务（例如从电路板上提取数据）超过 5 次。因此，与基于 PCI 或 PCIe 的设备相比，您应该计划在 USB DAQ 上执行更大的操作。
