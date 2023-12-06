@@ -10,9 +10,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jetlinks-standalone</artifactId>
+    <artifactId>cosl-standalone</artifactId>
     <properties>
-        <docker.image.name>registry.cn-shenzhen.aliyuncs.com/jetlinks/${project.artifactId}</docker.image.name>
+<!--        <docker.image.name>registry.cn-shenzhen.aliyuncs.com/jetlinks/${project.artifactId}</docker.image.name>-->
+        <docker.image.name>registry.cn-shenzhen.aliyuncs.com/jetlinks/jetlinks-standalone</docker.image.name>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
     </properties>
 

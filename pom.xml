@@ -10,7 +10,7 @@
     <modules>
         <module>jetlinks-components</module>
         <module>jetlinks-manager</module>
-        <module>jetlinks-standalone</module>
+        <module>cosl-standalone</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
